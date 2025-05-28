@@ -1,0 +1,32 @@
+# sentiment_analysis_vader.py
+
+# Install required libraries (uncomment and run if needed)
+# !pip install vaderSentiment wordcloud
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import re
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+from wordcloud import WordCloud
+import zipfile
+import os
+import argparse
+
+# Argument parser for command line execution
+parser = argparse.ArgumentParser(description='VADER Sentiment Analysis on Tweets Dataset')
+parser.add_argument('--zip_path', type=str, required=True, help='Path to the ZIP file containing the dataset')
+args = parser.parse_args()
+
+# Extract ZIP file
+with zipfile.ZipFile(args.zip_path, 'r') as zip_ref:
+    zip_ref.extractall('sentiment_data')
+
+# List extracted files
+print("Extracted files:", os.listdir('sentiment_data'))
+
+# Find and load the CSV file
+csv_files = [f for f in os.listdir('sentiment_data') if f.endswith('.csv')]
+csv_path = os.path.join('sentiment_data', csv_files[0])
+p
